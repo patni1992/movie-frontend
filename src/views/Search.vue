@@ -1,7 +1,10 @@
 <template>
-  <div class="search">
-    <h2>search</h2>
-    <div class="wrapper">
+  <div>
+    <sidebar />
+    <div class="content">
+      <div class="search">
+        <input  placeholder="search" class="search__input" type="text" />
+      </div>
       <div class="grid-container">
         <movie-card
           class="grid-item"
@@ -16,9 +19,11 @@
 
 <script>
 import MovieCard from "@/components/MovieCard";
+import Sidebar from "@/components/Sidebar";
 export default {
   components: {
-    MovieCard
+    MovieCard,
+    Sidebar
   },
   data() {
     return {
@@ -36,6 +41,21 @@ export default {
 </script>
 
 <style scoped>
+.search {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.search__input {
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 20rem;
+  background-color: #F5F7F9;
+  border: none;
+}
+.content {
+  padding-top: 2rem;
+  margin-left: var(--sidebar-width);
+}
 .grid-container {
   display: flex;
   flex-wrap: wrap;
