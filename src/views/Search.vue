@@ -3,7 +3,20 @@
     <sidebar />
     <div class="content">
       <div class="search">
-        <input  placeholder="search" class="search__input" type="text" />
+        <input
+          @keyup.enter="submit()"
+          v-model="search"
+          placeholder="search"
+          class="search__input"
+          type="text"
+        />
+
+        <pulse-loader
+          :loading="loading"
+          color="var(--theme-color)"
+          class="spinner"
+          size="2rem"
+        ></pulse-loader>
       </div>
       <div class="grid-container">
         <movie-card
@@ -20,22 +33,39 @@
 <script>
 import MovieCard from "@/components/MovieCard";
 import Sidebar from "@/components/Sidebar";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 export default {
+  name: "Search",
   components: {
     MovieCard,
-    Sidebar
+    Sidebar,
+    PulseLoader
   },
   data() {
     return {
-      movies: []
+      movies: [],
+      loading: true,
+      search: ""
     };
   },
-  name: "Search",
+  methods: {
+    submit(e) {
+      const search = this.search.trim();
+      this.fetchMovies(search);
+    },
+    fetchMovies(search) {
+      this.loading = true;
+      this.$api
+        .get(search ? `/tv-shows?q=${search} ` : "/tv-shows")
+        .then(resp => {
+          console.log(resp.data.data);
+          this.movies = resp.data.data;
+          this.loading = false;
+        });
+    }
+  },
   mounted() {
-    this.$api.get("/tv-shows").then(resp => {
-      console.log(resp.data.data);
-      this.movies = resp.data.data;
-    });
+    this.fetchMovies();
   }
 };
 </script>
@@ -49,7 +79,7 @@ export default {
   padding: 0.5rem;
   width: 100%;
   max-width: 20rem;
-  background-color: #F5F7F9;
+  background-color: #f5f7f9;
   border: none;
 }
 .content {
@@ -66,5 +96,13 @@ export default {
 .grid-item {
   padding: 0 1.2rem 1.2rem;
   max-width: 9rem;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: calc(56%);
+  transform: translate(-50%, -50%);
+  z-index: 100;
 }
 </style>
