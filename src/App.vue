@@ -4,4 +4,9 @@
   </div>
 </template>
 
-<style lang="scss"></style>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+body, html {
+  font-family: "Lato", sans-serif;
+}
+</style>
