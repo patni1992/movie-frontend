@@ -33,25 +33,13 @@ export default {
 
 <style scoped>
 .content {
-  padding-top: 2rem;
   margin-left: var(--sidebar-width);
 }
-
-@media (max-width: 768px) {
-  .content {
-    margin-left: 0;
-  }
-}
-
-.left-margin {
-  margin-left: var(--sidebar-width);
-}
-
 .burger {
+  display: none;
   padding: 1rem;
   transition: all 0.8s ease;
 }
-
 .burger__bar1,
 .burger__bar2,
 .burger__bar3 {
@@ -60,6 +48,19 @@ export default {
   background-color: #333;
   margin: 0.35rem 0;
   transition: 0.4s;
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+  }
+  .burger {
+    display: block;
+  }
+}
+
+.left-margin {
+  margin-left: var(--sidebar-width);
 }
 
 .change .burger__bar1 {
