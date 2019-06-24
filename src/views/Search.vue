@@ -1,45 +1,41 @@
 <template>
-  <div>
-    <sidebar />
-    <div class="content">
-      <div class="search">
-        <input
-          @keyup.enter="submit()"
-          v-model="search"
-          placeholder="search"
-          class="search__input"
-          type="text"
-        />
-
-        <pulse-loader
-          :loading="loading"
-          color="var(--theme-color)"
-          class="spinner"
-          size="2rem"
-        ></pulse-loader>
-      </div>
-      <div class="grid-container">
-        <movie-card
-          class="grid-item"
-          v-for="movie in movies"
-          :key="movie.id"
-          :movie="movie"
-        />
-      </div>
+  <app-layout>
+    <div class="search">
+      <input
+        @keyup="searchQuery($event.target.value)"
+        placeholder="search"
+        class="search__input"
+        type="text"
+      />
+      <pulse-loader
+        :loading="loading"
+        color="var(--theme-color)"
+        class="spinner"
+        size="2rem"
+      ></pulse-loader>
     </div>
-  </div>
+    <div class="grid-container">
+      <movie-card
+        class="grid-item"
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+      />
+    </div>
+  </app-layout>
 </template>
 
 <script>
 import MovieCard from "@/components/MovieCard";
-import Sidebar from "@/components/Sidebar";
+import { debounce } from "@/helpers";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
+import AppLayout from "@/layouts/AppLayout";
 export default {
   name: "Search",
   components: {
     MovieCard,
-    Sidebar,
-    PulseLoader
+    PulseLoader,
+    AppLayout
   },
   data() {
     return {
@@ -49,10 +45,9 @@ export default {
     };
   },
   methods: {
-    submit(e) {
-      const search = this.search.trim();
-      this.fetchMovies(search);
-    },
+    searchQuery: debounce(function(value) {
+      this.fetchMovies(value);
+    }, 500),
     fetchMovies(search) {
       this.loading = true;
       this.$api
@@ -81,10 +76,6 @@ export default {
   max-width: 20rem;
   background-color: #f5f7f9;
   border: none;
-}
-.content {
-  padding-top: 2rem;
-  margin-left: var(--sidebar-width);
 }
 .grid-container {
   display: flex;
