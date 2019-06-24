@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="{ 'sidebar--open': open }">
     <div class="logo">
       <Logo />
     </div>
@@ -37,6 +37,9 @@ export default {
     Messages,
     Search,
     Settings
+  },
+  props: {
+    open: Boolean
   }
 };
 </script>
@@ -49,12 +52,6 @@ export default {
 }
 .icon {
   margin-right: 0.8rem;
-}
-.sidebar {
-  width: var(--sidebar-width);
-  position: fixed;
-  height: 100%;
-  box-shadow: -3px 0 7px 0 var(--main-gray);
 }
 
 .sidebar__item {
@@ -80,6 +77,26 @@ export default {
   color: var(--theme-color);
   path {
     fill: var(--theme-color);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    overflow: hidden;
+    left: -100%;
+  }
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  position: fixed;
+  height: 100%;
+  box-shadow: -3px 0 7px 0 var(--main-gray);
+  transition: all 0.8s ease;
+
+  &--open {
+    transform: translateX(0px);
+    left: 0;
   }
 }
 </style>
