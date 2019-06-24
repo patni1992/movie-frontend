@@ -62,16 +62,16 @@ export default {
   transition: 0.4s;
 }
 
-.change .bar1 {
+.change .burger__bar1 {
   -webkit-transform: rotate(-45deg) translate(-9px, 6px);
   transform: rotate(-45deg) translate(-9px, 6px);
 }
 
-.change .bar2 {
+.change .burger__bar2 {
   opacity: 0;
 }
 
-.change .bar3 {
+.change .burger__bar3 {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
