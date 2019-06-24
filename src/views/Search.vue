@@ -53,7 +53,6 @@ export default {
       this.$api
         .get(search ? `/tv-shows?q=${search} ` : "/tv-shows")
         .then(resp => {
-          console.log(resp.data.data);
           this.movies = resp.data.data;
           this.loading = false;
         });
@@ -71,6 +70,7 @@ export default {
   margin-bottom: 2rem;
 }
 .search__input {
+  margin-top: 1rem;
   padding: 0.5rem;
   width: 100%;
   max-width: 20rem;
@@ -83,10 +83,11 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin: 0 1rem;
 }
 .grid-item {
-  padding: 0 1.2rem 1.2rem;
-  max-width: 9rem;
+  padding: 0 1.5rem 1.5rem;
+  max-width: 12rem;
 }
 
 .spinner {
