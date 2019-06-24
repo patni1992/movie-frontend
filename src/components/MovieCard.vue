@@ -1,6 +1,8 @@
 <template>
   <div class="movie">
-    <div class="movie__rating movie__rating--great">{{ movie.rating }}</div>
+    <div class="movie__rating" :class="getRatingColor(movie.rating)">
+      {{ movie.rating }}
+    </div>
     <img class="movie__img" :src="movie.image" alt="" />
     <p class="movie__name">{{ movie.name }}</p>
     <div class="movie__categories">
@@ -14,6 +16,20 @@
 <script>
 export default {
   name: "MovieCard",
+  methods: {
+    getRatingColor(rating) {
+      let color = "";
+      if (rating < 5) {
+        color = "movie__rating--bad";
+      } else if (rating < 7) {
+        color = "movie__rating--good";
+      } else {
+        color = "movie__rating--great";
+      }
+
+      return color;
+    }
+  },
   props: {
     movie: Object
   }
