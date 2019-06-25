@@ -1,29 +1,15 @@
-# movie-frontend
+git clone this repo cd in to it, don't forget to setup the backend.
 
-## Project setup
+https://github.com/patni1992/movie-backend
+
+```
+mv .env.example .env
+```
+
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn serve
 ```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
